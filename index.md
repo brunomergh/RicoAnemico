@@ -1,37 +1,42 @@
-## Welcome to GitHub Pages
+## Modelo Rico e Anêmico
 
-You can use the [editor on GitHub](https://github.com/brunomergh/RicoAnemico/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+O "Modelo de Domínio Anêmico", é um design pattern de desenvolvimento de software baseado no domínio do negócio (domain), onde objetos que representam modelagem do negócio (model) são "anêmicos", ou seja: desprovidos de comportamento.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Neste pattern, os objetos do model apenas carregam os dados, e os comportamentos de negócio são expostos por outras classes que recebem estes objetos anêmicos para processá-los.
 
-### Markdown
+Quais são as diferenças de implementação desse modelo em comparação com o Modelo Orientado a Objeto?
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+A reposta para esta pergunta pode ser controversa. Alguns podem dizer que não se pode descrever diferenças pois o design pattern Anemic Domain Model também é orientado a objetos.
 
-```markdown
-Syntax highlighted code block
+A noção de diferença nasce quando você aceita a proposição de que, na orientação a objetos, um objeto expõe dados e comportamentos. Neste caso, esta é a diferença: o design pattern Anemic Domain Model propõe justamente que estas coisas sejam separadas em objetos distintos.
 
-# Header 1
-## Header 2
-### Header 3
+Um pequeno exemplo dos dois modelos na linguagem java:
 
-- Bulleted
-- List
+Anemic Domain Model:
 
-1. Numbered
-2. List
+class ContaaPagar {
 
-**Bold** and _Italic_ and `Code` text
+    double valorDevido;
+    boolean pago;
+}
 
-[Link](url) and ![Image](src)
-```
+class BaixaContaaPagar {
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+    void baixar(ContaaPagar contaaPagar) {
+        contaaPagar.pago = true;
+        contaaPagar.valorDevido = 0d;
+    }
+}
+Outro design pattern (DDD, por exemplo):
 
-### Jekyll Themes
+class ContaaPagar {
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/brunomergh/RicoAnemico/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+    double valorDevido;
+    boolean pago;
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+    void baixar() {
+        // baixa esta conta a pagar
+        pago = true;
+        valorDevido = 0d;
+    }
+}
