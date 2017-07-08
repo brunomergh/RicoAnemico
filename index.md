@@ -10,33 +10,4 @@ A reposta para esta pergunta pode ser controversa. Alguns podem dizer que não s
 
 A noção de diferença nasce quando você aceita a proposição de que, na orientação a objetos, um objeto expõe dados e comportamentos. Neste caso, esta é a diferença: o design pattern Anemic Domain Model propõe justamente que estas coisas sejam separadas em objetos distintos.
 
-Um pequeno exemplo dos dois modelos na linguagem java:
-
-Anemic Domain Model:
-
-class ContaaPagar {
-
-    double valorDevido;
-    boolean pago;
-}
-
-class BaixaContaaPagar {
-
-    void baixar(ContaaPagar contaaPagar) {
-        contaaPagar.pago = true;
-        contaaPagar.valorDevido = 0d;
-    }
-}
-Outro design pattern (DDD, por exemplo):
-
-class ContaaPagar {
-
-    double valorDevido;
-    boolean pago;
-
-    void baixar() {
-        // baixa esta conta a pagar
-        pago = true;
-        valorDevido = 0d;
-    }
-}
+Ou seja, o modelo rico segue a risca esse conceito, imita o mundo real. Suas classes definem seus estados e comportamentos. O modelo anêmico, como seu próprio nome já diz, é desprovido do conceito total da orientação a objetos
